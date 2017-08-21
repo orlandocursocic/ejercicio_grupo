@@ -7,7 +7,7 @@ namespace ejercicio_grupo.Modelo
 {
     public class CuentaBancaria
     {
-        private long id { get; set; }
+        public long id { get; set; }
         private string numeroCuenta { get; set; }
         private string nombreTitular { get; set; }
         private string apellidosTitular { get; set; }

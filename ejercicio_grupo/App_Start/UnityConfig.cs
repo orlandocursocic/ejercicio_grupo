@@ -1,4 +1,6 @@
 using ejercicio_grupo.Models;
+using ejercicio_grupo.Repository;
+using ejercicio_grupo.Service;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using System;
@@ -13,12 +15,18 @@ namespace ejercicio_grupo
         public static void RegisterComponents()
         {
 			var container = new UnityContainer();
-            
+            container.AddNewExtension<Interception>();
+
+            container.RegisterType<IPersonaService, PersonaService>(
+                new Interceptor<InterfaceInterceptor>(),
+                new InterceptionBehavior<DBInterceptor>());
+            container.RegisterType<IPersonaRepository, PersonaRepository>();
+
             // register all your components with the container here
             // it is NOT necessary to register your controllers
-            
+
             // e.g. container.RegisterType<ITestService, TestService>();
-            
+
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }
 
