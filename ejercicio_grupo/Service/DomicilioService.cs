@@ -12,31 +12,32 @@ namespace ejercicio_grupo.Service
         private IDomicilioRepository domicilioRepository;
         public DomicilioService(IDomicilioRepository _domicilioRepository)
         {
+            this.domicilioRepository = _domicilioRepository;
         }
 
         public Domicilio Create(Domicilio domicilio)
         {
-            throw new NotImplementedException();
+            return domicilioRepository.Get(domicilio.id);
         }
 
         public Domicilio Delete(long id)
         {
-            throw new NotImplementedException();
+            return domicilioRepository.Delete(id);
         }
 
         public IQueryable<Domicilio> Get()
         {
-            throw new NotImplementedException();
+            return domicilioRepository.Get();
         }
 
         public Domicilio Get(long id)
         {
-            throw new NotImplementedException();
+            return domicilioRepository.Get(id);
         }
 
         public void Put(Domicilio domicilio)
         {
-            throw new NotImplementedException();
+            domicilioRepository.Put(domicilio);
         }
     }
 }
