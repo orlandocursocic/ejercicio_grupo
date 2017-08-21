@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -8,9 +9,9 @@ namespace ejercicio_grupo.Modelo
     public class CuentaBancaria
     {
         public long id { get; set; }
-        private string numeroCuenta { get; set; }
-        private string nombreTitular { get; set; }
-        private string apellidosTitular { get; set; }
+        public string numeroCuenta { get; set; }
+        public string nombreTitular { get; set; }
+        public string apellidosTitular { get; set; }
 
         public CuentaBancaria()
         {

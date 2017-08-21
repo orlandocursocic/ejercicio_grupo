@@ -15,6 +15,7 @@ namespace ejercicio_grupo
         public static void RegisterComponents()
         {
 			var container = new UnityContainer();
+
             container.AddNewExtension<Interception>();
 
             container.RegisterType<IPersonaService, PersonaService>(
