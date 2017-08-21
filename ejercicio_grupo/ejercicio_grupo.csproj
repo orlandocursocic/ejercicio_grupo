@@ -288,6 +288,7 @@
     <Compile Include="Repository\IDomicilioRepository.cs" />
     <Compile Include="Exceptions\NoEncontradoException.cs" />
     <Compile Include="Repository\PersonaRepository.cs" />
+	<Compile Include="Repository\IPersonaRepository.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
     <Compile Include="Service\DomicilioService.cs" />
     <Compile Include="Service\IDomicilioService.cs" />
