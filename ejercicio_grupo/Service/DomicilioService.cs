@@ -12,7 +12,6 @@ namespace ejercicio_grupo.Service
         private IDomicilioRepository domicilioRepository;
         public DomicilioService(IDomicilioRepository _domicilioRepository)
         {
-            this.usuariosRepository = _usuariosRepository;
         }
 
         public Domicilio Create(Domicilio domicilio)

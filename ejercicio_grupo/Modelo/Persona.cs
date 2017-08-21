@@ -15,11 +15,11 @@ namespace ejercicio_grupo.Modelo
         public Persona() {
         }
 
-        public Persona(int _id, string _nombre, string _apellido, string _edad){
-            this.id = _id;
-            this.nombre = _nombre;
-            this.apellido = _apellido;
-            this.edad = _edad;
+        public Persona(int id, string nombre, string apellido, int edad){
+            this.id = id;
+            this.nombre = nombre;
+            this.apellido = apellido;
+            this.edad = edad;
         }  
     }
 }

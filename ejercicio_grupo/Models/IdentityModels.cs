@@ -31,14 +31,13 @@ namespace ejercicio_grupo.Models
         {
         }
 
-        public DbSet<CuentaBancaria> CuentasBancarias { get; set; }
-        public DbSet<Domicilio> Domicilios { get; set; }
-        public DbSet<Persona> Personas { get; set; }
-
-
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
         }
+
+        public DbSet<CuentaBancaria> CuentasBancarias { get; set; }
+        public DbSet<Domicilio> Domicilios { get; set; }
+        public DbSet<Persona> Personas { get; set; }
     }
 }
