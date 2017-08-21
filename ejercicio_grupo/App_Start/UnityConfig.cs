@@ -1,4 +1,6 @@
 using ejercicio_grupo.Models;
+using ejercicio_grupo.Repository;
+using ejercicio_grupo.Service;
 using Microsoft.Practices.Unity;
 using Microsoft.Practices.Unity.InterceptionExtension;
 using System;
@@ -15,6 +17,12 @@ namespace ejercicio_grupo
 			var container = new UnityContainer();
 
             container.AddNewExtension<Interception>();
+
+            container.RegisterType<IPersonaService, PersonaService>(
+                new Interceptor<InterfaceInterceptor>(),
+                new InterceptionBehavior<DBInterceptor>());
+            container.RegisterType<IPersonaRepository, PersonaRepository>();
+
             // register all your components with the container here
             // it is NOT necessary to register your controllers
 

@@ -11,49 +11,55 @@ using System.Web.Http.Description;
 using ejercicio_grupo.Modelo;
 using ejercicio_grupo.Models;
 using System.Web.Http.Cors;
+using ejercicio_grupo.Service;
 
 namespace ejercicio_grupo.Controllers
 {
     [EnableCors(origins: "http://localhost:8080", headers: "*", methods: "*")]
 
-    public class CuentaBancariasController : ApiController
+    public class DomiciliosController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private IDomicilioService domicilioService;
 
-        // GET: api/CuentaBancarias
-        public IQueryable<CuentaBancaria> GetCuentasBancarias()
+        public DomiciliosController(IDomicilioService domicilioService)
         {
-            return db.CuentasBancarias;
+            this.domicilioService = domicilioService;
         }
 
-        // GET: api/CuentaBancarias/5
-        [ResponseType(typeof(CuentaBancaria))]
-        public IHttpActionResult GetCuentaBancaria(long id)
+        // GET: api/Domicilios
+        public IQueryable<Domicilio> GetDomicilios()
         {
-            CuentaBancaria cuentaBancaria = db.CuentasBancarias.Find(id);
-            if (cuentaBancaria == null)
+            return domicilioService.Get();
+        }
+
+        // GET: api/Domicilios/5
+        [ResponseType(typeof(Domicilio))]
+        public IHttpActionResult GetDomicilio(long id)
+        {
+            Domicilio domicilio = domicilioService.Get(id);
+            if (domicilio == null)
             {
                 return NotFound();
             }
 
-            return Ok(cuentaBancaria);
+            return Ok(domicilio);
         }
 
-        // PUT: api/CuentaBancarias/5
+        // PUT: api/Domicilios/5
         [ResponseType(typeof(void))]
-        public IHttpActionResult PutCuentaBancaria(long id, CuentaBancaria cuentaBancaria)
+        public IHttpActionResult PutDomicilio(long id, Domicilio domicilio)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            if (id != cuentaBancaria.id)
+            if (id != domicilio.id)
             {
                 return BadRequest();
             }
 
-            db.Entry(cuentaBancaria).State = EntityState.Modified;
+            db.Entry(domicilio).State = EntityState.Modified;
 
             try
             {
@@ -61,7 +67,7 @@ namespace ejercicio_grupo.Controllers
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!CuentaBancariaExists(id))
+                if (!DomicilioExists(id))
                 {
                     return NotFound();
                 }
@@ -74,35 +80,35 @@ namespace ejercicio_grupo.Controllers
             return StatusCode(HttpStatusCode.NoContent);
         }
 
-        // POST: api/CuentaBancarias
-        [ResponseType(typeof(CuentaBancaria))]
-        public IHttpActionResult PostCuentaBancaria(CuentaBancaria cuentaBancaria)
+        // POST: api/Domicilios
+        [ResponseType(typeof(Domicilio))]
+        public IHttpActionResult PostDomicilio(Domicilio domicilio)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            db.CuentasBancarias.Add(cuentaBancaria);
+            db.Domicilios.Add(domicilio);
             db.SaveChanges();
 
-            return CreatedAtRoute("DefaultApi", new { id = cuentaBancaria.id }, cuentaBancaria);
+            return CreatedAtRoute("DefaultApi", new { id = domicilio.id }, domicilio);
         }
 
-        // DELETE: api/CuentaBancarias/5
-        [ResponseType(typeof(CuentaBancaria))]
-        public IHttpActionResult DeleteCuentaBancaria(long id)
+        // DELETE: api/Domicilios/5
+        [ResponseType(typeof(Domicilio))]
+        public IHttpActionResult DeleteDomicilio(long id)
         {
-            CuentaBancaria cuentaBancaria = db.CuentasBancarias.Find(id);
-            if (cuentaBancaria == null)
+            Domicilio domicilio = db.Domicilios.Find(id);
+            if (domicilio == null)
             {
                 return NotFound();
             }
 
-            db.CuentasBancarias.Remove(cuentaBancaria);
+            db.Domicilios.Remove(domicilio);
             db.SaveChanges();
 
-            return Ok(cuentaBancaria);
+            return Ok(domicilio);
         }
 
         protected override void Dispose(bool disposing)
@@ -114,9 +120,9 @@ namespace ejercicio_grupo.Controllers
             base.Dispose(disposing);
         }
 
-        private bool CuentaBancariaExists(long id)
+        private bool DomicilioExists(long id)
         {
-            return db.CuentasBancarias.Count(e => e.id == id) > 0;
+            return db.Domicilios.Count(e => e.id == id) > 0;
         }
     }
 }

@@ -12,6 +12,7 @@ namespace ejercicio_grupo
     {
         public static void Register(HttpConfiguration config)
         {
+
             // Configuración y servicios de Web API
             // Configure Web API para usar solo la autenticación de token de portador.
             config.SuppressDefaultHostAuthentication();
@@ -20,11 +21,14 @@ namespace ejercicio_grupo
             // Rutas de Web API
             config.MapHttpAttributeRoutes();
 
+            config.EnableCors();
+
             config.Routes.MapHttpRoute(
                 name: "DefaultApi",
                 routeTemplate: "api/{controller}/{id}",
                 defaults: new { id = RouteParameter.Optional }
             );
+            
         }
     }
 }

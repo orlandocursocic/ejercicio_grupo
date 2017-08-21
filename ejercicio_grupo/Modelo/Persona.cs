@@ -15,8 +15,7 @@ namespace ejercicio_grupo.Modelo
         public Persona() {
         }
 
-        public Persona(int id, string nombre, string apellido, int edad){
-            this.id = id;
+        public Persona( string nombre, string apellido, int edad){
             this.nombre = nombre;
             this.apellido = apellido;
             this.edad = edad;
