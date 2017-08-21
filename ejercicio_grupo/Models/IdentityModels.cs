@@ -3,6 +3,9 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using Microsoft.AspNet.Identity.Owin;
+using System;
+using ejercicio_grupo.Modelo;
+using System.Data.Entity;
 
 namespace ejercicio_grupo.Models
 {
@@ -20,11 +23,19 @@ namespace ejercicio_grupo.Models
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
+        [ThreadStatic]
+        public static ApplicationDbContext applicationDbContext;
+
         public ApplicationDbContext()
             : base("DefaultConnection", throwIfV1Schema: false)
         {
         }
-        
+
+        public DbSet<CuentaBancaria> CuentasBancarias { get; set; }
+        public DbSet<Domicilio> Domicilios { get; set; }
+        public DbSet<Persona> Personas { get; set; }
+
+
         public static ApplicationDbContext Create()
         {
             return new ApplicationDbContext();
