@@ -7,5 +7,6 @@ namespace ejercicio_grupo.Modelo
 {
     public class Domicilio
     {
+
     }
 }
