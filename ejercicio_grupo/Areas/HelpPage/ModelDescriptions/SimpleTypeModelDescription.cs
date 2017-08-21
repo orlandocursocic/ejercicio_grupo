@@ -1,0 +1,6 @@
+namespace ejercicio_grupo.Areas.HelpPage.ModelDescriptions
+{
+    public class SimpleTypeModelDescription : ModelDescription
+    {
+    }
+}
