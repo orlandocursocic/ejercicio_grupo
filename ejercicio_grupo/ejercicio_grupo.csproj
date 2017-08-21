@@ -286,7 +286,10 @@
     <Compile Include="Providers\ApplicationOAuthProvider.cs" />
     <Compile Include="Repository\DomicilioRepository.cs" />
     <Compile Include="Repository\IDomicilioRepository.cs" />
+    <Compile Include="Exceptions\NoEncontradoException.cs" />
     <Compile Include="Results\ChallengeResult.cs" />
+    <Compile Include="Service\DomicilioService.cs" />
+    <Compile Include="Service\IDomicilioService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -351,7 +354,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Service\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />

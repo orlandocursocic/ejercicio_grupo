@@ -7,6 +7,7 @@ namespace ejercicio_grupo.Modelo
 {
     public class Domicilio
     {
+        public int id { get; set; }
         public string pais { get; set; }
         public string provincia { get; set; }
         public string municipio { get; set; }
