@@ -10,9 +10,12 @@ using System.Web.Http;
 using System.Web.Http.Description;
 using ejercicio_grupo.Modelo;
 using ejercicio_grupo.Models;
+using System.Web.Http.Cors;
 
 namespace ejercicio_grupo.Controllers
 {
+    [EnableCors(origins: "http://localhost:8080", headers: "*", methods: "*")]
+
     public class CuentaBancariasController : ApiController
     {
         private ApplicationDbContext db = new ApplicationDbContext();
