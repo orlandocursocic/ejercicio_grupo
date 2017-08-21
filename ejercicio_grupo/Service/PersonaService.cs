@@ -1,4 +1,5 @@
-﻿using ejercicio_grupo.Repository;
+﻿using ejercicio_grupo.Modelo;
+using ejercicio_grupo.Repository;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,37 +7,37 @@ using System.Web;
 
 namespace ejercicio_grupo.Service
 {
-    public class PersonaService
+    public class PersonaService : IPersonaService
     {
-        private IPersonaRepository PersonasRepository;
-        public PersonasService(IPersonasRepository _personasRepository)
+        private IPersonaRepository PersonaRepository;
+        public PersonaService(IPersonaRepository personaRepository)
         {
-            this.PersonasRepository = _personasRepository;
+            this.PersonaRepository = personaRepository;
         }
 
         public Persona Get(long id)
         {
-            return PersonasRepository.Get(id);
+            return PersonaRepository.Get(id);
         }
 
         public IQueryable<Persona> Get()
         {
-            return PersonasRepository.Get();
+            return PersonaRepository.Get();
         }
 
         public Persona Create(Persona entrada)
         {
-            return PersonasRepository.Create(entrada);
+            return PersonaRepository.Create(entrada);
         }
 
         public void Put(Persona entrada)
         {
-            PersonasRepository.Put(entrada);
+            PersonaRepository.Put(entrada);
         }
 
         public Persona Delete(long id)
         {
-            return PersonasRepository.Delete(id);
+            return PersonaRepository.Delete(id);
         }
 
         public Persona create(Persona entrada)
