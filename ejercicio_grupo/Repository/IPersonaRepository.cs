@@ -7,8 +7,8 @@ namespace ejercicio_grupo.Repository
     {
         Persona Create(Persona persona);
         Persona Delete(long id);
-        IQueryable<Persona> Get();
-        Persona Get(long id);
-        void Put(Persona persona);
+        IQueryable<Persona> ReadAll();
+        Persona Read(long id);
+        void Update(Persona persona);
     }
 }

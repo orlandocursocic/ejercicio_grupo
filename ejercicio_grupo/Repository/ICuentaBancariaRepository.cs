@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ejercicio_grupo.Repository
 {
-    interface ICuentaBancariaRepository
+    public interface ICuentaBancariaRepository
     {
         CuentaBancaria Create(CuentaBancaria cuentaBancaria);
         CuentaBancaria Read(long id);

@@ -11,6 +11,8 @@ using System.Web.Http.Description;
 using ejercicio_grupo.Modelo;
 using ejercicio_grupo.Models;
 using System.Web.Http.Cors;
+using ejercicio_grupo.Service;
+using ejercicio_grupo.Repository;
 
 namespace ejercicio_grupo.Controllers
 {
@@ -18,19 +20,24 @@ namespace ejercicio_grupo.Controllers
 
     public class CuentaBancariasController : ApiController
     {
-        private ApplicationDbContext db = new ApplicationDbContext();
+        private ICuentaBancariaService cuentaBancariaService;
+
+        public CuentaBancariasController(ICuentaBancariaService cuentaBancariaService)
+        {
+            this.cuentaBancariaService = cuentaBancariaService;
+        }
 
         // GET: api/CuentaBancarias
         public IQueryable<CuentaBancaria> GetCuentasBancarias()
         {
-            return db.CuentasBancarias;
+            return cuentaBancariaService.ReadAll();
         }
 
         // GET: api/CuentaBancarias/5
         [ResponseType(typeof(CuentaBancaria))]
         public IHttpActionResult GetCuentaBancaria(long id)
         {
-            CuentaBancaria cuentaBancaria = db.CuentasBancarias.Find(id);
+            CuentaBancaria cuentaBancaria = cuentaBancariaService.Read(id);
             if (cuentaBancaria == null)
             {
                 return NotFound();
@@ -53,22 +60,13 @@ namespace ejercicio_grupo.Controllers
                 return BadRequest();
             }
 
-            db.Entry(cuentaBancaria).State = EntityState.Modified;
-
             try
             {
-                db.SaveChanges();
+                cuentaBancariaService.Update(cuentaBancaria);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (NoEncontradoException)
             {
-                if (!CuentaBancariaExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -83,8 +81,7 @@ namespace ejercicio_grupo.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.CuentasBancarias.Add(cuentaBancaria);
-            db.SaveChanges();
+            cuentaBancaria = cuentaBancariaService.Create(cuentaBancaria);
 
             return CreatedAtRoute("DefaultApi", new { id = cuentaBancaria.id }, cuentaBancaria);
         }
@@ -93,30 +90,17 @@ namespace ejercicio_grupo.Controllers
         [ResponseType(typeof(CuentaBancaria))]
         public IHttpActionResult DeleteCuentaBancaria(long id)
         {
-            CuentaBancaria cuentaBancaria = db.CuentasBancarias.Find(id);
-            if (cuentaBancaria == null)
+            CuentaBancaria cuentaBancaria;
+            try
+            {
+                cuentaBancaria = cuentaBancariaService.Delete(id);
+            }
+            catch (NoEncontradoException)
             {
                 return NotFound();
             }
 
-            db.CuentasBancarias.Remove(cuentaBancaria);
-            db.SaveChanges();
-
             return Ok(cuentaBancaria);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool CuentaBancariaExists(long id)
-        {
-            return db.CuentasBancarias.Count(e => e.id == id) > 0;
         }
     }
 }

@@ -12,10 +12,11 @@ namespace ejercicio_grupo.Modelo
         public string apellido { get; set; }
         public int edad { get; set; }
 
-        public Persona() {
+        public Persona()
+        {
         }
 
-        public Persona( string nombre, string apellido, int edad){
+        public Persona(string nombre, string apellido, int edad){
             this.nombre = nombre;
             this.apellido = apellido;
             this.edad = edad;

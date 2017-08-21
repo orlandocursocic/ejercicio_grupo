@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace ejercicio_grupo.Service
 {
-    interface ICuentaBancariaService
+    public interface ICuentaBancariaService
     {
         CuentaBancaria Create(CuentaBancaria cuentaBancaria);
-        CuentaBancaria Get(long id);
-        IQueryable<CuentaBancaria> Get();
-        void Put(CuentaBancaria cuentaBancaria);
+        CuentaBancaria Read(long id);
+        IQueryable<CuentaBancaria> ReadAll();
+        void Update(CuentaBancaria cuentaBancaria);
         CuentaBancaria Delete(long id);
     }
 }

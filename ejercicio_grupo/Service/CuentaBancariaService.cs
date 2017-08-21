@@ -11,29 +11,34 @@ namespace ejercicio_grupo.Service
     {
         private ICuentaBancariaRepository cuentaBancariaRepository;
 
+        public CuentaBancariaService(ICuentaBancariaRepository cuentaBancariaRepository)
+        {
+            this.cuentaBancariaRepository = cuentaBancariaRepository;
+        }
+
         public CuentaBancaria Create(CuentaBancaria cuentaBancaria)
         {
             return cuentaBancariaRepository.Create(cuentaBancaria);
         }
-        
+
         public CuentaBancaria Delete(long id)
         {
-            throw new NotImplementedException();
+            return cuentaBancariaRepository.Delete(id);
         }
 
-        public IQueryable<CuentaBancaria> Get()
+        public IQueryable<CuentaBancaria> ReadAll()
         {
-            throw new NotImplementedException();
+            return cuentaBancariaRepository.ReadAll();
         }
 
-        public CuentaBancaria Get(long id)
+        public CuentaBancaria Read(long id)
         {
-            throw new NotImplementedException();
+            return cuentaBancariaRepository.Read(id);
         }
 
-        public void Put(CuentaBancaria cuentaBancaria)
+        public void Update(CuentaBancaria cuentaBancaria)
         {
-            throw new NotImplementedException();
+            cuentaBancariaRepository.Update(cuentaBancaria);
         }
     }
 }

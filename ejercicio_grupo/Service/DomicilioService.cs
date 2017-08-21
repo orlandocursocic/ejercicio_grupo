@@ -17,7 +17,7 @@ namespace ejercicio_grupo.Service
 
         public Domicilio Create(Domicilio domicilio)
         {
-            return domicilioRepository.Get(domicilio.id);
+            return domicilioRepository.Create(domicilio);
         }
 
         public Domicilio Delete(long id)
@@ -25,19 +25,19 @@ namespace ejercicio_grupo.Service
             return domicilioRepository.Delete(id);
         }
 
-        public IQueryable<Domicilio> Get()
+        public IQueryable<Domicilio> ReadAll()
         {
-            return domicilioRepository.Get();
+            return domicilioRepository.ReadAll();
         }
 
-        public Domicilio Get(long id)
+        public Domicilio Read(long id)
         {
-            return domicilioRepository.Get(id);
+            return domicilioRepository.Read(id);
         }
 
-        public void Put(Domicilio domicilio)
+        public void Update(Domicilio domicilio)
         {
-            domicilioRepository.Put(domicilio);
+            domicilioRepository.Update(domicilio);
         }
     }
 }

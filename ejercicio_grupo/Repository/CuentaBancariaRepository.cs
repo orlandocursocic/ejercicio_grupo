@@ -29,7 +29,7 @@ namespace ejercicio_grupo.Repository
 
         public CuentaBancaria Read(long id)
         {
-            return ApplicationDbContext.applicationDbContext.CuentasBancarias.Find(id); 
+            return ApplicationDbContext.applicationDbContext.CuentasBancarias.Find(id);
         }
 
         public IQueryable<CuentaBancaria> ReadAll()

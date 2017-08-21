@@ -10,19 +10,20 @@ namespace ejercicio_grupo.Service
     public class PersonaService : IPersonaService
     {
         private IPersonaRepository PersonaRepository;
+
         public PersonaService(IPersonaRepository personaRepository)
         {
             this.PersonaRepository = personaRepository;
         }
 
-        public Persona Get(long id)
+        public Persona Read(long id)
         {
-            return PersonaRepository.Get(id);
+            return PersonaRepository.Read(id);
         }
 
-        public IQueryable<Persona> Get()
+        public IQueryable<Persona> ReadAll()
         {
-            return PersonaRepository.Get();
+            return PersonaRepository.ReadAll();
         }
 
         public Persona Create(Persona entrada)
@@ -30,19 +31,14 @@ namespace ejercicio_grupo.Service
             return PersonaRepository.Create(entrada);
         }
 
-        public void Put(Persona entrada)
+        public void Update(Persona entrada)
         {
-            PersonaRepository.Put(entrada);
+            PersonaRepository.Update(entrada);
         }
 
         public Persona Delete(long id)
         {
             return PersonaRepository.Delete(id);
-        }
-
-        public Persona create(Persona entrada)
-        {
-            throw new NotImplementedException();
         }
     }
 }

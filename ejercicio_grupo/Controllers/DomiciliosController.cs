@@ -12,6 +12,7 @@ using ejercicio_grupo.Modelo;
 using ejercicio_grupo.Models;
 using System.Web.Http.Cors;
 using ejercicio_grupo.Service;
+using ejercicio_grupo.Repository;
 
 namespace ejercicio_grupo.Controllers
 {
@@ -29,14 +30,14 @@ namespace ejercicio_grupo.Controllers
         // GET: api/Domicilios
         public IQueryable<Domicilio> GetDomicilios()
         {
-            return domicilioService.Get();
+            return domicilioService.ReadAll();
         }
 
         // GET: api/Domicilios/5
         [ResponseType(typeof(Domicilio))]
         public IHttpActionResult GetDomicilio(long id)
         {
-            Domicilio domicilio = domicilioService.Get(id);
+            Domicilio domicilio = domicilioService.Read(id);
             if (domicilio == null)
             {
                 return NotFound();
@@ -59,22 +60,13 @@ namespace ejercicio_grupo.Controllers
                 return BadRequest();
             }
 
-            db.Entry(domicilio).State = EntityState.Modified;
-
             try
             {
-                db.SaveChanges();
+                domicilioService.Update(domicilio);
             }
-            catch (DbUpdateConcurrencyException)
+            catch (NoEncontradoException)
             {
-                if (!DomicilioExists(id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return NotFound();
             }
 
             return StatusCode(HttpStatusCode.NoContent);
@@ -89,8 +81,7 @@ namespace ejercicio_grupo.Controllers
                 return BadRequest(ModelState);
             }
 
-            db.Domicilios.Add(domicilio);
-            db.SaveChanges();
+            domicilio = domicilioService.Create(domicilio);
 
             return CreatedAtRoute("DefaultApi", new { id = domicilio.id }, domicilio);
         }
@@ -99,30 +90,17 @@ namespace ejercicio_grupo.Controllers
         [ResponseType(typeof(Domicilio))]
         public IHttpActionResult DeleteDomicilio(long id)
         {
-            Domicilio domicilio = db.Domicilios.Find(id);
-            if (domicilio == null)
+            Domicilio domicilio;
+            try
+            {
+                domicilio = domicilioService.Delete(id);
+            }
+            catch (NoEncontradoException)
             {
                 return NotFound();
             }
 
-            db.Domicilios.Remove(domicilio);
-            db.SaveChanges();
-
             return Ok(domicilio);
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
-        }
-
-        private bool DomicilioExists(long id)
-        {
-            return db.Domicilios.Count(e => e.id == id) > 0;
         }
     }
 }

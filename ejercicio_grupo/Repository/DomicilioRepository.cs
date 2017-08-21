@@ -27,19 +27,19 @@ namespace ejercicio_grupo.Repository
             return domicilio;
         }
 
-        public IQueryable<Domicilio> Get()
+        public IQueryable<Domicilio> ReadAll()
         {
             IList<Domicilio> lista = new List<Domicilio>(ApplicationDbContext.applicationDbContext.Domicilios);
 
             return lista.AsQueryable();
         }
 
-        public Domicilio Get(long id)
+        public Domicilio Read(long id)
         {
             return ApplicationDbContext.applicationDbContext.Domicilios.Find(id);
         }
 
-        public void Put(Domicilio domicilio)
+        public void Update(Domicilio domicilio)
         {
             if (ApplicationDbContext.applicationDbContext.Domicilios.Count(e => e.id == domicilio.id) == 0)
             {

@@ -17,6 +17,7 @@ using System.Web.Http.Cors;
 namespace ejercicio_grupo.Controllers
 {
     [EnableCors(origins: "http://localhost:8080", headers: "*", methods: "*")]
+
     public class PersonasController : ApiController
     {
         private IPersonaService personaService;
@@ -29,20 +30,20 @@ namespace ejercicio_grupo.Controllers
         // GET: api/Personas
         public IQueryable<Persona> GetPersonas()
         {
-            return personaService.Get();
+            return personaService.ReadAll();
         }
 
         // GET: api/Personas/5
         [ResponseType(typeof(Persona))]
         public IHttpActionResult GetEntrada(long id)
         {
-            Persona personas = personaService.Get(id);
-            if (personas == null)
+            Persona persona = personaService.Read(id);
+            if (persona == null)
             {
                 return NotFound();
             }
 
-            return Ok(personas);
+            return Ok(persona);
         }
 
         // PUT: api/Personas/5
@@ -61,7 +62,7 @@ namespace ejercicio_grupo.Controllers
 
             try
             {
-                personaService.Put(persona);
+                personaService.Update(persona);
             }
             catch (NoEncontradoException)
             {

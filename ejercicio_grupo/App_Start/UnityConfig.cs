@@ -14,19 +14,18 @@ namespace ejercicio_grupo
     {
         public static void RegisterComponents()
         {
-			var container = new UnityContainer();
+            var container = new UnityContainer();
 
             container.AddNewExtension<Interception>();
 
-            container.RegisterType<IPersonaService, PersonaService>(
-                new Interceptor<InterfaceInterceptor>(),
-                new InterceptionBehavior<DBInterceptor>());
+            container.RegisterType<IPersonaService, PersonaService>(new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<DBInterceptor>());
             container.RegisterType<IPersonaRepository, PersonaRepository>();
 
-            // register all your components with the container here
-            // it is NOT necessary to register your controllers
+            container.RegisterType<ICuentaBancariaService, CuentaBancariaService>(new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<DBInterceptor>());
+            container.RegisterType<ICuentaBancariaRepository, CuentaBancariaRepository>();
 
-            // e.g. container.RegisterType<ITestService, TestService>();
+            container.RegisterType<IDomicilioService, DomicilioService>(new Interceptor<InterfaceInterceptor>(), new InterceptionBehavior<DBInterceptor>());
+            container.RegisterType<IDomicilioRepository, DomicilioRepository>();
 
             GlobalConfiguration.Configuration.DependencyResolver = new UnityDependencyResolver(container);
         }

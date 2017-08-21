@@ -15,7 +15,8 @@ namespace ejercicio_grupo.Modelo
         public string direccion { get; set; }
 
         public Domicilio()
-        { }
+        {
+        }
 
         public Domicilio(string pais, string provincia, string municipio, int codigoPostal, string direccion)
         {

@@ -299,6 +299,8 @@
     <Compile Include="Service\IDomicilioService.cs" />
     <Compile Include="Service\IPersonaService.cs" />
     <Compile Include="Service\PersonaService.cs" />
+	<Compile Include="Service\ICuentaBancariaService.cs" />
+	<Compile Include="Service\CuentaBancariaService.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -15,12 +15,12 @@ namespace ejercicio_grupo.Repository
             return ApplicationDbContext.applicationDbContext.Personas.Add(persona);
         }
 
-        public Persona Get(long id)
+        public Persona Read(long id)
         {
             return ApplicationDbContext.applicationDbContext.Personas.Find(id);
         }
 
-        public IQueryable<Persona> Get()
+        public IQueryable<Persona> ReadAll()
         {
             IList<Persona> lista = new List<Persona>(ApplicationDbContext.applicationDbContext.Personas);
 
@@ -28,9 +28,9 @@ namespace ejercicio_grupo.Repository
         }
 
 
-        public void Put(Persona persona)
+        public void Update(Persona persona)
         {
-            if (ApplicationDbContext.applicationDbContext.Personas.Count(e => e.id == persona.id) == 0)
+            if (ApplicationDbContext.applicationDbContext.Personas.Count(p => p.id == persona.id) == 0)
             {
                 throw new NoEncontradoException("No he encontrado la entidad");
             }

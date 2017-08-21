@@ -10,9 +10,9 @@ namespace ejercicio_grupo.Service
     public interface IDomicilioService
     {
         Domicilio Create(Domicilio domicilio);
-        Domicilio Get(long id);
-        IQueryable<Domicilio> Get();
-        void Put(Domicilio domicilio);
+        Domicilio Read(long id);
+        IQueryable<Domicilio> ReadAll();
+        void Update(Domicilio domicilio);
         Domicilio Delete(long id);
     }
 }
