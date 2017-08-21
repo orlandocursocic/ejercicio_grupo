@@ -1,4 +1,6 @@
-﻿namespace ejercicio_grupo.Repository
+﻿using ejercicio_grupo.Modelo;
+
+namespace ejercicio_grupo.Repository
 {
     public interface IPersonaRepository
     {

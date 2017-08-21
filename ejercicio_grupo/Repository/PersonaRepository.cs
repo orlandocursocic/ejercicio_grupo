@@ -1,12 +1,12 @@
-﻿using System;
+﻿using ejercicio_grupo.Modelo;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
 namespace ejercicio_grupo.Repository
 {
-    public class PersonaRepository: IPersonaRepository
-
+    public class PersonaRepository : IPersonaRepository, IPersonaRepository
     {
         public Persona Create(Persona persona)
         {
