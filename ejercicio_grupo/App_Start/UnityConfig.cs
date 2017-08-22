@@ -57,7 +57,13 @@ namespace ejercicio_grupo
 
                                 dbContextTransaction.Commit();
                             }
-                            catch (Exception e)
+                            catch (NoEncontradoException e)
+                            {
+                                dbContextTransaction.Rollback();
+                                ApplicationDbContext.applicationDbContext = null;
+                                throw e;
+                            }
+                            catch (Exception e) 
                             {
                                 dbContextTransaction.Rollback();
                                 ApplicationDbContext.applicationDbContext = null;
